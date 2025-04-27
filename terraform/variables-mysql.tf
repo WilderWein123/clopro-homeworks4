@@ -72,7 +72,7 @@ variable mysql-users {
   }))
   default = {
     "user1" = {
-      name = "node01"
+      name = "user1"
       password = "My$ecuredPassword!23"
       permission-roles = ["ALL"]
       authentication = "SHA256_PASSWORD"

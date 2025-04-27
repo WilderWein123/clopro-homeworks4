@@ -1,7 +1,7 @@
 resource "yandex_mdb_mysql_cluster" "cluster01" {
   name        = var.mysql.mycluster.name
   environment = var.mysql.mycluster.environment
-  network_id  = yandex_vpc_network.public-a.id
+  network_id  = yandex_vpc_network.mysql-a.id
   version     = var.mysql.mycluster.version
   deletion_protection = var.mysql.mycluster.deletion
   backup_retain_period_days = var.mysql.mycluster.backup-keep
@@ -26,15 +26,15 @@ resource "yandex_mdb_mysql_cluster" "cluster01" {
   host {
     name = var.mysql-nodes.node01.name
     zone      = var.mysql-nodes.node01.zone
-    subnet_id = yandex_vpc_subnet.public-a.id
+    subnet_id = yandex_vpc_subnet.mysql-a.id
     backup_priority = var.mysql-nodes.node01.backup_priority
   }
 
   host {
     name = var.mysql-nodes.node02.name
     zone      = var.mysql-nodes.node02.zone
-    subnet_id = yandex_vpc_subnet.public-d.id
-    replication_source_name = var.mysql-nodes.node01
+    subnet_id = yandex_vpc_subnet.mysql-d.id
+    replication_source_name = var.mysql-nodes.node01.name
     backup_priority = var.mysql-nodes.node02.backup_priority
   }
 
@@ -55,7 +55,7 @@ resource "yandex_mdb_mysql_user" "my_user" {
 
   permission {
     database_name = yandex_mdb_mysql_database.my_db.name
-    roles         = var.mysql.users.user1.roles
+    roles         = var.mysql-users.user1.permission-roles
   }
  authentication_plugin = var.mysql-users.user1.authentication
 }
