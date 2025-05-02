@@ -1,7 +1,7 @@
 resource "yandex_mdb_mysql_cluster" "cluster01" {
   name        = var.mysql.mycluster.name
   environment = var.mysql.mycluster.environment
-  network_id  = yandex_vpc_network.mysql-a.id
+  network_id  = yandex_vpc_network.mysql.id
   version     = var.mysql.mycluster.version
   deletion_protection = var.mysql.mycluster.deletion
   backup_retain_period_days = var.mysql.mycluster.backup-keep

@@ -1,6 +1,6 @@
 resource "yandex_kubernetes_cluster" "netology_k8s" {
   name        = "netology-k8s-cluster"
-  network_id  = yandex_vpc_network.network.id
+  network_id  = yandex_vpc_network.kubernetes.id
   cluster_ipv4_range = "10.1.0.0/16"
   service_ipv4_range = "10.2.0.0/16"
 
