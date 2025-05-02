@@ -29,14 +29,14 @@ variable mysql {
       resources-disk-type = "network-hdd"
       resources-disk-size = 20
       config-sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
-      config-max-connections = 10000
+      config-max-connections = 512
       config-default-auth-plugin = "MYSQL_NATIVE_PASSWORD"
       config-innodb-deadlocks = true
       maintenance-type = "ANYTIME"
       username = "dbuser"
       password = "My$ecuredPa$$wrd01"
       dbname = "netology_db"
-      backup-keep = 2
+      backup-keep = 7
       backup-start-hours = 23
       backup-start-minutes = 59
     }
@@ -57,7 +57,7 @@ variable mysql-nodes {
     }
     "node02" = {
       name = "node02"
-      zone = "ru-central1-d"
+      zone = "ru-central1-b"
       backup_priority = 20
     }
   }

@@ -33,8 +33,7 @@ resource "yandex_mdb_mysql_cluster" "cluster01" {
   host {
     name = var.mysql-nodes.node02.name
     zone      = var.mysql-nodes.node02.zone
-    subnet_id = yandex_vpc_subnet.mysql-d.id
-    replication_source_name = var.mysql-nodes.node01.name
+    subnet_id = yandex_vpc_subnet.mysql-b.id
     backup_priority = var.mysql-nodes.node02.backup_priority
   }
 

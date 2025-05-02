@@ -15,21 +15,15 @@ resource "yandex_kubernetes_node_group" "main_nodes" {
     location {
       zone = "ru-central1-a"
     }
-    location {
-      zone = "ru-central1-b"
-    }
-    location {
-      zone = "ru-central1-d"
-    }
   }
 
   instance_template {
     platform_id = "standard-v2"
     network_interface {
       subnet_ids = [
-        yandex_vpc_subnet.kubernetes-a.id,
-        yandex_vpc_subnet.kubernetes-b.id,
-        yandex_vpc_subnet.kubernetes-d.id
+        yandex_vpc_subnet.kubernetes-1.id,
+        yandex_vpc_subnet.kubernetes-2.id,
+        yandex_vpc_subnet.kubernetes-3.id
       ]
       nat = true
     }
@@ -40,7 +34,7 @@ resource "yandex_kubernetes_node_group" "main_nodes" {
     }
 
     boot_disk {
-      type = "network-hdd"
+      type = "network-ssd"
       size = 30
     }
   }

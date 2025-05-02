@@ -9,15 +9,15 @@ resource "yandex_kubernetes_cluster" "netology_k8s" {
       region = "ru-central1"
       location {
         zone      = "ru-central1-a"
-        subnet_id = yandex_vpc_subnet.kubernetes-a.id
+        subnet_id = yandex_vpc_subnet.kubernetes-1.id
       }
       location {
-        zone      = "ru-central1-b"
-        subnet_id = yandex_vpc_subnet.kubernetes-b.id
+        zone      = "ru-central1-a"
+        subnet_id = yandex_vpc_subnet.kubernetes-2.id
       }
       location {
-        zone      = "ru-central1-d"
-        subnet_id = yandex_vpc_subnet.kubernetes-d.id
+        zone      = "ru-central1-a"
+        subnet_id = yandex_vpc_subnet.kubernetes-3.id
       }
     }
     version   = "1.29"
