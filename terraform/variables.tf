@@ -14,6 +14,11 @@ variable "default_zone" {
   default     = "ru-central1-a"
 }
 
-variable "token" {
+#variable "token" {
+#  type        = string
+#}
+
+variable "service-account-id" {
   type        = string
+  default     = "ajeui6be7oe0nhiabnuh"
 }
