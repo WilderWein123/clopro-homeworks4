@@ -1,28 +1,28 @@
 resource "yandex_kubernetes_node_group" "main_nodes" {
   cluster_id = yandex_kubernetes_cluster.netology_k8s.id
-  name       = "main-nodegroup"
-  version    = "1.29"
+  name       = var.kubernetes-nodes.nodegroup.name
+  version    = var.kubernetes.mycluster.version
 
   scale_policy {
     auto_scale {
-      min     = 3
-      max     = 6
-      initial = 3
+      min     = var.kubernetes-nodes.nodegroup.autoscalemin
+      max     = var.kubernetes-nodes.nodegroup.autoscalemax
+      initial = var.kubernetes-nodes.nodegroup.autoscaleinit
     }
   }
 
   allocation_policy {
     location {
-      zone = "ru-central1-a"
+      zone = var.kubernetes.mycluster.region
     }
   }
 
 
   instance_template {
-    platform_id = "standard-v2"
+    platform_id = var.kubernetes-nodes.nodegroup.platform_id
     network_interface {
       subnet_ids = [yandex_vpc_subnet.kubernetes.id]
-      nat = true
+      nat = var.kubernetes-nodes.nodegroup.nat
     }
 
     metadata = {
@@ -30,17 +30,17 @@ resource "yandex_kubernetes_node_group" "main_nodes" {
     }
 
     resources {
-      cores  = 2
-      memory = 4
+      cores  = var.kubernetes-nodes.nodegroup.nodecpu
+      memory = var.kubernetes-nodes.nodegroup.noderam
     }
 
     boot_disk {
-      type = "network-ssd"
-      size = 30
+      type = var.kubernetes-nodes.nodegroup.nodehddtype
+      size = var.kubernetes-nodes.nodegroup.nodehddsize
     }
 
     scheduling_policy {
-      preemptible = true
+      preemptible = var.kubernetes-nodes.nodegroup.preemptible
     }
   }
 }

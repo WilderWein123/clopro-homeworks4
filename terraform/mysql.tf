@@ -11,11 +11,12 @@ resource "yandex_mdb_mysql_cluster" "cluster01" {
     minutes = var.mysql.mycluster.backup-start-minutes
   }
 
-  access {
-    web_sql = true
-    data_transfer = true
-    data_lens = true
-  }
+# uncomment these lines for 3rd party sql administration toolz
+#  access {
+#    web_sql = true
+#    data_transfer = true
+#    data_lens = true
+#  }
 
   resources {
     resource_preset_id = var.mysql.mycluster.resources-preset
