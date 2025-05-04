@@ -17,15 +17,16 @@ resource "yandex_kubernetes_node_group" "main_nodes" {
     }
   }
 
+
   instance_template {
     platform_id = "standard-v2"
     network_interface {
-      subnet_ids = [
-        yandex_vpc_subnet.kubernetes-1.id,
-        yandex_vpc_subnet.kubernetes-2.id,
-        yandex_vpc_subnet.kubernetes-3.id
-      ]
+      subnet_ids = [yandex_vpc_subnet.kubernetes.id]
       nat = true
+    }
+
+    metadata = {
+      ssh-keys = var.ssh_key
     }
 
     resources {
@@ -36,6 +37,10 @@ resource "yandex_kubernetes_node_group" "main_nodes" {
     boot_disk {
       type = "network-ssd"
       size = 30
+    }
+
+    scheduling_policy {
+      preemptible = true
     }
   }
 }

@@ -5,9 +5,16 @@ resource "yandex_mdb_mysql_cluster" "cluster01" {
   version     = var.mysql.mycluster.version
   deletion_protection = var.mysql.mycluster.deletion
   backup_retain_period_days = var.mysql.mycluster.backup-keep
+  folder_id = var.folder_id
   backup_window_start {
     hours = var.mysql.mycluster.backup-start-hours
     minutes = var.mysql.mycluster.backup-start-minutes
+  }
+
+  access {
+    web_sql = true
+    data_transfer = true
+    data_lens = true
   }
 
   resources {
@@ -24,22 +31,19 @@ resource "yandex_mdb_mysql_cluster" "cluster01" {
   }
 
   host {
-    name = var.mysql-nodes.node01.name
     zone      = var.mysql-nodes.node01.zone
     subnet_id = yandex_vpc_subnet.mysql-a.id
-    backup_priority = var.mysql-nodes.node01.backup_priority
   }
 
   host {
-    name = var.mysql-nodes.node02.name
     zone      = var.mysql-nodes.node02.zone
     subnet_id = yandex_vpc_subnet.mysql-b.id
-    backup_priority = var.mysql-nodes.node02.backup_priority
   }
 
   maintenance_window {
     type = var.mysql.mycluster.maintenance-type
   }
+
 }
 
 resource "yandex_mdb_mysql_database" "my_db" {

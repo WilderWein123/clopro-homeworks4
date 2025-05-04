@@ -24,7 +24,7 @@ variable mysql {
       name = "cluster01"
       environment = "PRESTABLE"
       version = "8.0"
-      deletion = false
+      deletion = true
       resources-preset = "b1.medium"
       resources-disk-type = "network-hdd"
       resources-disk-size = 20
